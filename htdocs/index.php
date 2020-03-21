@@ -1,17 +1,7 @@
 <?php
-    include 'database.php';
+    include 'model/database.php';
 
-    session_start();
-
-    // ユーザーIDを一時的に定義
-    $id = 1;
-
-    $db = new PDO(DSN, DB_USER, DB_PASS);
-    $sql = "SELECT * FROM todos WHERE user_id = " . $id;
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($result);
+    include 'controller/all_list.php'
 ?>
 
 
@@ -23,12 +13,12 @@
     <title>ToDoリスト</title>
 </head>
 <body>
-    <?php include("header.php")  ?>
+    <?php include("views/header.php")  ?>
     <?php foreach ($result as $row) {?>
         <table  width="200">
             <tr>
                 <td width="25%"><button>削除</button></td>
-                <td width="75%"><?=htmlspecialchars($row["title"], ENT_QUOTES)?></td>
+                <td width="75%"><a href="detail.php?id=<?php echo htmlspecialchars($row["id"]); ?>"><?=htmlspecialchars($row["title"], ENT_QUOTES)?></a></td>
             </tr>
         </table>
     <?php  }?>
