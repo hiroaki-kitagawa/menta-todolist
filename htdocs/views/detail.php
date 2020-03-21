@@ -32,14 +32,14 @@
                 <dd>完了</dd>
             <?php }?>
         </div>
-        <form action="controller/edit.php" method="post">
+        <form action="edit.php" method="post">
             <input type="submit" value="編集">
             <input type="hidden" name="id" value="<?= htmlspecialchars($row["id"]); ?>">
         </form>
     <?php  }?>
 
     <?php
-    echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">前に戻る</a>';
+    echo '<a href="../index.php">ToDo一覧へ</a>';
     ?>
 
 </body>

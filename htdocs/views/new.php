@@ -1,8 +1,6 @@
 <?php
     include '../model/database.php';
 
-    include '../controller/new_controller.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +11,7 @@
     <title>ToDoリスト</title>
 </head>
 <body>
-    <?php include("views/header.php")  ?>
+    <?php include("header.php")  ?>
     <form action="" method="post">
         <div>
             <label>タイトル</label>
