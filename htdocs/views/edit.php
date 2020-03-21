@@ -1,10 +1,6 @@
 <?php
     include '../model/database.php';
-
     include '../controller/edit_todo.php';
-
-    var_dump($result);
-
 ?>
 
 

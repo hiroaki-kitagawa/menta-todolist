@@ -1,6 +1,5 @@
 <?php
     include 'model/database.php';
-
     include 'controller/show_list.php';
 ?>
 

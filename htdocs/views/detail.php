@@ -1,8 +1,6 @@
 <?php
     include '../model/database.php';
-
     include '../controller/show_detail.php';
-
 ?>
 
 <!DOCTYPE html>
