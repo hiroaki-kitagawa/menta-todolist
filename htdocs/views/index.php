@@ -28,6 +28,6 @@
         </table>
     <?php  }?>
 
-    <button><a href="views/new.php">新規作成</a></button>
+    <button><a href="new.php">新規作成</a></button>
 </body>
 </html>

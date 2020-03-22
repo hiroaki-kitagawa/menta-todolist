@@ -2,19 +2,28 @@
 include '../model/Todo.php';
 
 class TodoController {
-    public function index() {
+    public function index()
+    {
         // TodoクラスからTODOリストを取得
         $todo = new Todo();
         return $todo->getAll();
     }
 
-    public function detail() {
+    public function detail()
+    {
         $detail = new Todo();
         return $detail->getDetail();
     }
 
-    public function delete() {
+    public function delete()
+    {
         $delete = new Todo();
         return $delete->deleteTodo();
+    }
+
+    public function insert()
+    {
+        $insert = new Todo();
+        return $insert->insertTodo();
     }
 }

@@ -26,9 +26,6 @@
         <button type="submit">作成</button>
     </form>
 
-
-
-
     <?php
     echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">前に戻る</a>';
     ?>
