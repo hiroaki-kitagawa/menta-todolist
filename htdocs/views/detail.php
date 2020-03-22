@@ -1,6 +1,8 @@
 <?php
-    include '../model/database.php';
-    include '../controller/show_detail.php';
+    include '../model/dbconfig.php';
+    include '../controller/TodoController.php';
+
+    $result = TodoController::detail();
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +39,7 @@
     <?php  }?>
 
     <?php
-    echo '<a href="../index.php">ToDo一覧へ</a>';
+    echo '<a href="index.php">ToDo一覧へ</a>';
     ?>
 
 </body>

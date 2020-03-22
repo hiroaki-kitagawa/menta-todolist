@@ -1,5 +1,5 @@
 <?php
-    include '../model/database.php';
+    include '../model/dbconfig.php';
 
 ?>
 
@@ -23,13 +23,6 @@
             <textarea name="detail" id="detail" cols="30" rows="10"></textarea>
         </div>
 
-        <div>
-            <label>状態</label>
-            <select name="status" id="status">
-                <option value="0">未完了</option>
-                <option value="1">完了</option>
-            </select>
-        </div>
         <button type="submit">作成</button>
     </form>
 

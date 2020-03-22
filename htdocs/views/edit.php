@@ -1,6 +1,5 @@
 <?php
     include '../model/database.php';
-    include '../controller/edit_todo.php';
 ?>
 
 
@@ -14,7 +13,7 @@
 <body>
     <?php include("header.php")  ?>
     <?php foreach ($result as $row) {?>
-        <form action="../controller/insert.php" method="post">
+        <form action="../controller/update.php" method="post">
             <div>
                 <label>タイトル</label>
                 <input type="text" id="title" name="title" value="<?= htmlspecialchars($row["title"]); ?>">
@@ -39,12 +38,10 @@
                     </select>
                 <?php } ?>
             </div>
-            <button type="submit">作成</button>
+            <button type="submit">更新</button>
         </form>
     <?php  }?>
 
-
-    <button><a href="#">更新</a></button>
     <?php
     echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">前に戻る</a>';
     ?>
