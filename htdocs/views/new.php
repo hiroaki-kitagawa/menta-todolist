@@ -12,7 +12,7 @@
 </head>
 <body>
     <?php include("header.php")  ?>
-    <form action="" method="post">
+    <form action="../controller/insert.php" method="post">
         <div>
             <label>タイトル</label>
             <input type="text" id="title" name="title">
@@ -25,8 +25,12 @@
 
         <div>
             <label>状態</label>
-            <input type="checkbox" name="status" id="status">
+            <select name="status" id="status">
+                <option value="0">未完了</option>
+                <option value="1">完了</option>
+            </select>
         </div>
+        <button type="submit">作成</button>
     </form>
 
 

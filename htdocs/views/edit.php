@@ -14,7 +14,7 @@
 <body>
     <?php include("header.php")  ?>
     <?php foreach ($result as $row) {?>
-        <form action="" method="post">
+        <form action="../controller/insert.php" method="post">
             <div>
                 <label>タイトル</label>
                 <input type="text" id="title" name="title" value="<?= htmlspecialchars($row["title"]); ?>">
@@ -39,6 +39,7 @@
                     </select>
                 <?php } ?>
             </div>
+            <button type="submit">作成</button>
         </form>
     <?php  }?>
 
