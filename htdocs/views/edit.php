@@ -28,9 +28,15 @@
             <div>
                 <label>状態</label>
                 <?php if((int)$row["status"] === 0) {?>
-                    <input type="checkbox" name="status" id="status">未完了
+                    <select name="status" id="status">
+                        <option value="0" selected="selected">未完了</option>
+                        <option value="1">完了</option>
+                    </select>
                 <?php }else{ ?>
-                    <input type="checkbox" name="status" id="status" checked="checked">完了
+                    <select name="status" id="status">
+                        <option value="0">未完了</option>
+                        <option value="1" selected="selected">完了</option>
+                    </select>
                 <?php } ?>
             </div>
         </form>
