@@ -1,5 +1,8 @@
 <?php
-    include '../model/database.php';
+    include '../model/dbconfig.php';
+    include '../controller/TodoController.php';
+
+    $result = TodoController::edit();
 ?>
 
 
@@ -12,8 +15,8 @@
 </head>
 <body>
     <?php include("header.php")  ?>
-    <?php foreach ($result as $row) {?>
-        <form action="../controller/update.php" method="post">
+    <form action="../controller/update.php" method="post">
+        <?php foreach ($result as $row) {?>
             <div>
                 <label>タイトル</label>
                 <input type="text" id="title" name="title" value="<?= htmlspecialchars($row["title"]); ?>">
@@ -39,8 +42,8 @@
                 <?php } ?>
             </div>
             <button type="submit">更新</button>
-        </form>
-    <?php  }?>
+        <?php  }?>
+    </form>
 
     <?php
     echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">前に戻る</a>';

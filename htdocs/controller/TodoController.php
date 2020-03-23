@@ -26,4 +26,16 @@ class TodoController {
         $insert = new Todo();
         return $insert->insertTodo();
     }
+
+    public function edit()
+    {
+        $detail = new Todo();
+        return $detail->editTodo();
+    }
+
+    public function update()
+    {
+        $update = new Todo();
+        return $update->updateTodo();
+    }
 }

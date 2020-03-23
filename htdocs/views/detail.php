@@ -13,7 +13,7 @@
     <title>ToDoリスト</title>
 </head>
 <body>
-    <?php include("../views/header.php")  ?>
+    <?php include("header.php")  ?>
 
     <?php foreach ($result as $row) {?>
         <div>
