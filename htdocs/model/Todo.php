@@ -149,13 +149,12 @@ class Todo {
         $result = null;
 
         $user_id = 1; // ユーザID一時的に固定
-        
+
         $created_at = date('Y-m-d H:i:s');
         $updated_at = date('Y-m-d H:i:s');
 
         try {
             $this->db->beginTransaction();
-            // $sql = "UPDATE todos SET (user_id, title, detail, status, created_at, updated_at, deleted_at) VALUES (:user_id, :title, :detail, :status, :created_at, :updated_at, NULL) WHERE id = :id";
             $sql = "UPDATE todos SET
                 user_id = :user_id,
                 title = :title,
