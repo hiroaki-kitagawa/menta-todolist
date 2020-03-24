@@ -11,31 +11,40 @@ class TodoController {
 
     public function detail()
     {
+        $id = $_GET["id"];
         $detail = new Todo();
-        return $detail->getDetail();
+        return $detail->findById($id);
     }
 
     public function delete()
     {
         $delete = new Todo();
-        return $delete->deleteTodo();
+        $id = $_POST["id"];
+        return $delete->delete($id);
     }
 
     public function insert()
     {
         $insert = new Todo();
-        return $insert->insertTodo();
+        $title = $_POST["title"];
+        $detail = $_POST["detail"];
+        return $insert->insert($title, $detail);
     }
 
     public function edit()
     {
         $detail = new Todo();
-        return $detail->editTodo();
+        $id = $_POST["id"];
+        return $detail->editTodo($id);
     }
 
     public function update()
     {
         $update = new Todo();
-        return $update->updateTodo();
+        $id = $_POST["id"];
+        $title = $_POST["title"];
+        $detail = $_POST["detail"];
+        $status = $_POST["status"];
+        return $update->update($id, $title, $detail, $status);
     }
 }

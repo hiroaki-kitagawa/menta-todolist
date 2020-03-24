@@ -1,5 +1,4 @@
 <?php
-    include '../model/dbconfig.php';
     include '../controller/TodoController.php';
 
     $result = TodoController::edit();
@@ -42,6 +41,8 @@
                 <?php } ?>
             </div>
             <button type="submit">更新</button>
+            <input type="hidden" name="id" value="<?= htmlspecialchars(
+                $row["id"]); ?>">
         <?php  }?>
     </form>
 

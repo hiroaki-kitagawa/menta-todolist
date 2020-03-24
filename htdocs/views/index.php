@@ -1,5 +1,4 @@
 <?php
-    include '../model/dbconfig.php';
     include '../controller/TodoController.php';
 
     $result = TodoController::index();

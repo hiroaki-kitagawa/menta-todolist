@@ -1,8 +1,15 @@
 <?php
 
-include 'dbconfig.php';
+include '../config/dbconfig.php';
 
 class Todo {
+
+    private $db;
+
+    function __construct()	{
+        $this->db = new PDO(DSN, DB_USER, DB_PASS);
+    }
+
     public function getAll()
     {
         // ユーザーIDを一時的に定義
@@ -14,14 +21,12 @@ class Todo {
         $result = null;
 
         try {
-            $db = new PDO(DSN, DB_USER, DB_PASS);
             $sql = "SELECT * FROM todos WHERE user_id = :id";
-            $stmt = $db->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->execute(array(':id' => $id));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e) {
             echo $e->getMesasge();
-            die();
         }
 
         // DB接続を解除
@@ -31,9 +36,8 @@ class Todo {
         return $result;
     }
 
-    public function getDetail()
+    public function findById($id)
     {
-        $id = $_GET["id"];
 
         $db = null;
         $sql = null;
@@ -41,14 +45,12 @@ class Todo {
         $result = null;
 
         try {
-            $db = new PDO(DSN, DB_USER, DB_PASS);
             $sql = "SELECT * FROM todos WHERE id = :id";
-            $stmt = $db->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->execute(array(':id' => $id));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e) {
             echo $e->getMesasge();
-            die();
         }
 
         // DB接続を解除
@@ -58,24 +60,23 @@ class Todo {
         return $result;
     }
 
-    public function deleteTodo()
+    public function delete($id)
     {
-        $id = $_POST["id"];
-
         $db = null;
         $sql = null;
         $stmt = null;
         $result = null;
 
         try {
-            $db = new PDO(DSN, DB_USER, DB_PASS);
+            $this->db->beginTransaction();
             $sql = "DELETE FROM todos WHERE id = :id";
-            $stmt = $db->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->execute(array(':id' => $id));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $this->db->commit();
         } catch(PDOException $e) {
+            $this->db->rollBack();
             echo $e->getMessage();
-            die();
         }
 
         // DB接続を解除
@@ -85,29 +86,28 @@ class Todo {
         return $result;
     }
 
-    public function insertTodo()
+    public function insert($title, $detail)
     {
         $db = null;
         $sql = null;
         $stmt = null;
         $result = null;
 
-        $user_id = 1;
-        $title = $_POST["title"];
-        $detail = $_POST["detail"];
+        $user_id = 1; // 一時的に固定
         $status = 0;
         $created_at = date('Y-m-d H:i:s');
         $updated_at = date('Y-m-d H:i:s');
 
         try {
-            $db = new PDO(DSN, DB_USER, DB_PASS);
+            $this->db->beginTransaction();
             $sql = "INSERT INTO todos (user_id, title, detail, status, created_at, updated_at, deleted_at) VALUES (:user_id, :title, :detail, :status, :created_at, :updated_at, NULL)";
-            $stmt = $db->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->execute(array(':user_id' => $user_id, ':title' => $title, ':detail' => $detail, ':status' => $status, ':created_at' => $created_at, ':updated_at' => $updated_at));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $this->db->commit();
         } catch(PDOException $e) {
+            $this->db->rollBack();
             echo $e->getMessage();
-            die();
         }
 
         // DB接続を解除
@@ -117,9 +117,8 @@ class Todo {
         return $result;
     }
 
-    public function editTodo()
+    public function editTodo($id)
     {
-        $id = $_POST["id"];
 
         $db = null;
         $sql = null;
@@ -127,14 +126,12 @@ class Todo {
         $result = null;
 
         try {
-            $db = new PDO(DSN, DB_USER, DB_PASS);
             $sql = "SELECT * FROM todos WHERE id = :id";
-            $stmt = $db->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->execute(array(':id' => $id));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e) {
             echo $e->getMessage();
-            die();
         }
 
         // DB接続を解除
@@ -144,33 +141,37 @@ class Todo {
         return $result;
     }
 
-    public function updateTodo()
+    public function update($id, $title, $detail, $status)
     {
         $db = null;
         $sql = null;
         $stmt = null;
         $result = null;
 
-        $id = 15;
-
-        // var_dump($id);
-
         $user_id = 1; // ユーザID一時的に固定
-        $title = $_POST["title"];
-        $detail = $_POST["detail"];
-        $status = $_POST["status"];
+        
         $created_at = date('Y-m-d H:i:s');
         $updated_at = date('Y-m-d H:i:s');
 
         try {
-            $db = new PDO(DSN, DB_USER, DB_PASS);
-            $sql = "UPDATE todos SET (user_id, title, detail, status, created_at, updated_at, deleted_at) VALUES (:user_id, :title, :detail, :status, :created_at, :updated_at, NULL) WHERE id = :id";
-            $stmt = $db->prepare($sql);
+            $this->db->beginTransaction();
+            // $sql = "UPDATE todos SET (user_id, title, detail, status, created_at, updated_at, deleted_at) VALUES (:user_id, :title, :detail, :status, :created_at, :updated_at, NULL) WHERE id = :id";
+            $sql = "UPDATE todos SET
+                user_id = :user_id,
+                title = :title,
+                detail = :detail,
+                status = :status,
+                created_at = :created_at,
+                updated_at = :updated_at,
+                deleted_at = NULL
+                WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
             $stmt->execute(array(':user_id' => $user_id, ':title' => $title, ':detail' => $detail, ':status' => $status, ':created_at' => $created_at, ':updated_at' => $updated_at, ':id' => $id));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $this->db->commit();
         } catch(PDOException $e) {
+            $this->db->rollBack();
             echo $e->getMessage();
-            die();
         }
 
         // DB接続を解除
