@@ -2,7 +2,8 @@
 
 include '../config/dbconfig.php';
 
-class Todo {
+class Todo
+{
 
     private $db;
 
@@ -107,30 +108,6 @@ class Todo {
             $this->db->commit();
         } catch(PDOException $e) {
             $this->db->rollBack();
-            echo $e->getMessage();
-        }
-
-        // DB接続を解除
-        $stmt = null;
-        $db = null;
-
-        return $result;
-    }
-
-    public function editTodo($id)
-    {
-
-        $db = null;
-        $sql = null;
-        $stmt = null;
-        $result = null;
-
-        try {
-            $sql = "SELECT * FROM todos WHERE id = :id";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute(array(':id' => $id));
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch(PDOException $e) {
             echo $e->getMessage();
         }
 

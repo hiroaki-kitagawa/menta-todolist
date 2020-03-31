@@ -15,6 +15,13 @@
 <body>
     <?php include("header.php")  ?>
     <form action="../controller/update.php" method="post">
+        <?php if( count($_SESSION['errormsg']) >= 1 ): ?>
+            <ul class="error_list">
+            <?php foreach( $_SESSION['errormsg'] as $message ): ?>
+                <li><?php echo $message; ?></li>
+            <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
         <?php foreach ($result as $row) {?>
             <div>
                 <label>タイトル</label>

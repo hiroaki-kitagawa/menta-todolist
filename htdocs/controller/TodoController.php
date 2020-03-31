@@ -1,5 +1,6 @@
 <?php
 include '../model/Todo.php';
+include 'validation.php';
 
 class TodoController {
     public function index()
@@ -25,26 +26,47 @@ class TodoController {
 
     public function insert()
     {
-        $insert = new Todo();
+        $todo = new Todo();
+        $error = array();
         $title = $_POST["title"];
         $detail = $_POST["detail"];
-        return $insert->insert($title, $detail);
+        if (empty($title)) {
+            $error[] = "「タイトル」は入力必須です。";
+        }
+
+        return $todo->insert($title, $detail, $error);
     }
 
     public function edit()
     {
         $detail = new Todo();
         $id = $_POST["id"];
-        return $detail->editTodo($id);
+        return $detail->findById($id);
     }
 
     public function update()
     {
-        $update = new Todo();
         $id = $_POST["id"];
         $title = $_POST["title"];
         $detail = $_POST["detail"];
         $status = $_POST["status"];
-        return $update->update($id, $title, $detail, $status);
+
+        // バリデーションチェック
+        $errormsg = array();
+        if (empty($title)) {
+            $errormsg[] = "タイトルが入力されていません。";
+        }
+        if (empty($detail)) {
+            $errormsg[] = "内容が入力されていません。";
+        }
+        if (count($errormsg) >= 1) {
+            $_SESSION['errormsg'] = $errormsg;
+        }
+
+
+
+
+        $todo = new Todo();
+        return $todo->update($id, $title, $detail, $status);
     }
 }
