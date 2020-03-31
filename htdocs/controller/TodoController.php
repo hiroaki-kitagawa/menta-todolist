@@ -50,15 +50,6 @@ class TodoController {
         $detail = $_POST["detail"];
         $status = $_POST["status"];
 
-        // バリデーションチェック
-        $errormsg = array();
-        if (empty($title)) {
-            $errormsg[] = "タイトルが入力されていません。";
-        }
-        if (empty($detail)) {
-            $errormsg[] = "内容が入力されていません。";
-        }
-
         // エラーがなければ更新処理を行う
         if ( empty($errormsg)) {
             $todo = new Todo();
