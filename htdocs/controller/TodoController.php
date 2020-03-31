@@ -1,6 +1,5 @@
 <?php
 include '../model/Todo.php';
-include 'validation.php';
 
 class TodoController {
     public function index()
