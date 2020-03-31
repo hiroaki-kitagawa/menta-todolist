@@ -59,14 +59,11 @@ class TodoController {
         if (empty($detail)) {
             $errormsg[] = "内容が入力されていません。";
         }
-        if (count($errormsg) >= 1) {
-            $_SESSION['errormsg'] = $errormsg;
+
+        // エラーがなければ更新処理を行う
+        if ( empty($errormsg)) {
+            $todo = new Todo();
+            return $todo->update($id, $title, $detail, $status);
         }
-
-
-
-
-        $todo = new Todo();
-        return $todo->update($id, $title, $detail, $status);
     }
 }

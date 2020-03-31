@@ -15,9 +15,9 @@
 <body>
     <?php include("header.php")  ?>
     <form action="../controller/update.php" method="post">
-        <?php if( count($_SESSION['errormsg']) >= 1 ): ?>
+        <?php if( !empty($errormsg) ): ?>
             <ul class="error_list">
-            <?php foreach( $_SESSION['errormsg'] as $message ): ?>
+            <?php foreach( $errormsg as $message ): ?>
                 <li><?php echo $message; ?></li>
             <?php endforeach; ?>
             </ul>
