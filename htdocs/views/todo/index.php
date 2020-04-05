@@ -1,7 +1,7 @@
 <?php
-    include '../controller/TodoController.php';
+    include(dirname(__FILE__,3) . "/controller/TodoController.php");
 
-    $result = TodoController::index();
+    $array = TodoController::index();
 ?>
 
 
@@ -14,15 +14,15 @@
 </head>
 <body>
     <?php include("header.php")  ?>
-    <?php foreach ($result as $row) {?>
+    <?php foreach ($array as $element) {?>
         <table  width="200">
             <tr>
                 <td width="25%">
-                <form action="../controller/delete.php" method="post">
+                <form action="delete.php" method="post">
                     <input type="submit" value="削除">
-                    <input type="hidden" name="id" value="<?= htmlspecialchars($row["id"]); ?>">
+                    <input type="hidden" name="id" value="<?= htmlspecialchars($element["id"]); ?>">
                 </form>
-                <td width="75%"><a href="detail.php?id=<?= htmlspecialchars($row["id"]); ?>"><?= htmlspecialchars($row["title"], ENT_QUOTES)?></a></td>
+                <td width="75%"><a href="detail.php?id=<?= htmlspecialchars($element["id"]); ?>"><?= htmlspecialchars($element["title"], ENT_QUOTES)?></a></td>
             </tr>
         </table>
     <?php  }?>

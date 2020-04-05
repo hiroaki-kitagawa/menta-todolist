@@ -1,7 +1,7 @@
 <?php
-    include '../controller/TodoController.php';
+    include(dirname(__FILE__,3) . "/controller/TodoController.php");
 
-    $result = TodoController::detail();
+    $array = TodoController::detail();
 ?>
 
 <!DOCTYPE html>
@@ -14,27 +14,24 @@
 <body>
     <?php include("header.php")  ?>
 
-    <?php foreach ($result as $row) {?>
+    <?php foreach ($array as $element) {?>
         <div>
             <label>タイトル</label>
-            <p><?=htmlspecialchars($row["title"], ENT_QUOTES)?></p>
+            <p><?=htmlspecialchars($element["title"], ENT_QUOTES)?></p>
         </div>
         <div>
             <label>内容</label>
-            <p><?=htmlspecialchars($row["detail"], ENT_QUOTES)?></p>
+            <p><?=htmlspecialchars($element["detail"], ENT_QUOTES)?></p>
         </div>
         <div>
             <label>状態</label>
-            <?php if((int)$row["status"] === 0) { ?>
+            <?php if((int)$element["status"] === 0) { ?>
                 <p>未完了</p>
             <?php }else{ ?>
                 <dd>完了</dd>
             <?php }?>
         </div>
-        <form action="edit.php" method="post">
-            <input type="submit" value="編集">
-            <input type="hidden" name="id" value="<?= htmlspecialchars($row["id"]); ?>">
-        </form>
+        <button><a href="edit.php?id=<?= htmlspecialchars($element["id"]); ?>">編集</a></button>
     <?php  }?>
 
     <?php

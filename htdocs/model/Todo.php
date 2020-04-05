@@ -1,6 +1,5 @@
 <?php
-
-include '../config/dbconfig.php';
+include(dirname(__FILE__,2) . "/config/dbconfig.php");
 
 class Todo
 {

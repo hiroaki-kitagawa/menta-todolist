@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,7 +7,7 @@
 </head>
 <body>
     <?php include("header.php")  ?>
-    <form action="../controller/insert.php" method="post">
+    <form action="insert.php" method="post">
         <div>
             <label>タイトル</label>
             <input type="text" id="title" name="title">

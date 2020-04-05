@@ -1,5 +1,5 @@
 <?php
-include '../model/Todo.php';
+include(dirname(__FILE__,2) . "/model/Todo.php");
 
 class TodoController {
     public function index()
@@ -39,7 +39,7 @@ class TodoController {
     public function edit()
     {
         $detail = new Todo();
-        $id = $_POST["id"];
+        $id = $_GET["id"];
         return $detail->findById($id);
     }
 
