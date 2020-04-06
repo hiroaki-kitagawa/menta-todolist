@@ -8,10 +8,10 @@
     $_SESSION['errormsg'] = array();
     // バリデーションチェック
     if ($title === '') {
-        $_SESSION['errormsg'] = "タイトルが入力されていません。";
+        $_SESSION['errormsg']['title'] = "タイトルが入力されていません。";
     }
     if ($detail === '') {
-        $_SESSION['errormsg'] = "内容が入力されていません。";
+        $_SESSION['errormsg']['detail'] = "内容が入力されていません。";
     }
 
     if (empty($_SESSION['errormsg'])) {

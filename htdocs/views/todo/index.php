@@ -1,6 +1,7 @@
 <?php
     include(dirname(__FILE__,3) . "/controller/TodoController.php");
-
+    session_start();
+    session_destroy();
     $array = TodoController::index();
 ?>
 
