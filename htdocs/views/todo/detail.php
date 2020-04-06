@@ -1,5 +1,5 @@
 <?php
-    include(dirname(__FILE__,3) . "/controller/TodoController.php");
+    require_once(dirname(__FILE__,3) . "/controller/TodoController.php");
 
     $array = TodoController::detail();
 ?>
@@ -35,7 +35,7 @@
     <?php  }?>
 
     <?php
-    echo '<a href="index.php">ToDo一覧へ</a>';
+    echo '<a href="top.php">ToDo一覧へ</a>';
     ?>
 
 </body>

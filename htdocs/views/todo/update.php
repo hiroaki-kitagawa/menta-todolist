@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include(dirname(__FILE__,3) . "/controller/TodoController.php");
+    require_once(dirname(__FILE__,3) . "/controller/TodoController.php");
 
     $id = $_POST["id"];
     $title = $_POST['title'];
@@ -17,7 +17,7 @@
     if (empty($_SESSION['errormsg'])) {
         TodoController::update();
         session_destroy();
-        header("Location: index.php");
+        header("Location: top.php");
     } else {
         header("Location: edit.php?id=" . (int)$id );
     }

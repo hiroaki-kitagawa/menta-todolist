@@ -1,5 +1,5 @@
 <?php
-include(dirname(__FILE__,2) . "/model/Todo.php");
+require_once(dirname(__FILE__,2) . "/model/Todo.php");
 
 class TodoController {
     public function index()

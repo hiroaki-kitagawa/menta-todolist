@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include(dirname(__FILE__,3) . "/controller/TodoController.php");
+    require_once(dirname(__FILE__,3) . "/controller/TodoController.php");
     $array = TodoController::edit();
     $errormsg = $_SESSION['errormsg'];
 ?>
@@ -56,7 +56,7 @@
     </form>
 
     <?php
-    echo '<a href="index.php">TODO一覧へ</a>';
+    echo '<a href="top.php">TODO一覧へ</a>';
     ?>
 </body>
 </html>
