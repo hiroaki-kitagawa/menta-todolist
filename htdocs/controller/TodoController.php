@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(dirname(__FILE__,2) . "/model/Todo.php");
 
 class TodoController {
@@ -26,14 +27,10 @@ class TodoController {
     public function insert()
     {
         $todo = new Todo();
-        $error = array();
         $title = $_POST["title"];
         $detail = $_POST["detail"];
-        if (empty($title)) {
-            $error[] = "「タイトル」は入力必須です。";
-        }
+        return $todo->insert($title, $detail);
 
-        return $todo->insert($title, $detail, $error);
     }
 
     public function edit()
@@ -50,10 +47,7 @@ class TodoController {
         $detail = $_POST["detail"];
         $status = $_POST["status"];
 
-        // エラーがなければ更新処理を行う
-        if ( empty($errormsg)) {
-            $todo = new Todo();
-            return $todo->update($id, $title, $detail, $status);
-        }
+        $todo = new Todo();
+        return $todo->update($id, $title, $detail, $status);
     }
 }

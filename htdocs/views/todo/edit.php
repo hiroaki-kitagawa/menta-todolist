@@ -56,7 +56,7 @@
     </form>
 
     <?php
-    echo '<a href="top.php">TODO一覧へ</a>';
+        echo '<a href="top.php">TODO一覧へ</a>';
     ?>
 </body>
 </html>
