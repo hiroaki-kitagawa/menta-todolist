@@ -47,7 +47,6 @@ class TodoController {
 
         //生成したインスタンスにパラメータをセット
         $validation->setData($data);
-        // $validation->isValid();
         //バリデーション
         //バリデーションがOKなら
         if ($validation->isValid()) {
@@ -87,9 +86,9 @@ class TodoController {
 
         $validation = new Validation;
 
-        $validation->isValid($data);
+        $validation->setData($data);
 
-        if (empty($_SESSION['errormsg'])) {
+        if ($validation->isValid()) {
             $valid_data = $validation->getData();
             $title = $valid_data['title'];
             $detail = $valid_data['detail'];
