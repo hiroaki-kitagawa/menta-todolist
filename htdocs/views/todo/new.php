@@ -2,6 +2,8 @@
     session_start();
     require_once(dirname(__FILE__,3) . "/controller/TodoController.php");
     $errormsg = $_SESSION['errormsg'];
+    $title = $_SESSION['title'];
+    $detail = $_SESSION['detail'];
 ?>
 
 <!DOCTYPE html>
@@ -24,12 +26,12 @@
     <form action="insert.php" method="post">
         <div>
             <label>タイトル</label>
-            <input type="text" id="title" name="title">
+            <input type="text" id="title" name="title" value="<?= $title ?>">
         </div>
 
         <div>
             <label>内容</label>
-            <textarea name="detail" id="detail" cols="30" rows="10"></textarea>
+            <textarea name="detail" id="detail" cols="30" rows="10"><?= $detail ?></textarea>
         </div>
 
         <button type="submit">作成</button>

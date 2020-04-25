@@ -23,7 +23,13 @@ class TodoController {
     {
         $delete = new Todo();
         $id = $_POST["id"];
-        return $delete->delete($id);
+
+        if($delete->findById($id)){
+            return $delete->delete($id);
+        } else {
+            header("Location: top.php");
+        }
+
     }
 
     public function insert()
@@ -40,10 +46,11 @@ class TodoController {
         $validation = new Validation;
 
         //生成したインスタンスにパラメータをセット
-        $validation->isValid($data);
+        $validation->setData($data);
+        // $validation->isValid();
         //バリデーション
         //バリデーションがOKなら
-        if (empty($_SESSION['errormsg'])) {
+        if ($validation->isValid()) {
             $valid_data = $validation->getData();
             $title = $valid_data['title'];
             $detail = $valid_data['detail'];
@@ -52,6 +59,8 @@ class TodoController {
             header("Location: top.php");
         } else {
             //NGなら？
+            $_SESSION['title'] = $title;
+            $_SESSION['detail'] = $detail;
             header("Location: new.php");
         }
 

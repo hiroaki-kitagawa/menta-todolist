@@ -3,7 +3,6 @@ require_once(dirname(__FILE__,2) . "/config/dbconfig.php");
 
 class Todo
 {
-
     private $db;
 
     function __construct()	{

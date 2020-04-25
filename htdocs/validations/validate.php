@@ -1,18 +1,31 @@
 <?php
 
 class Validation {
-    public function isValid($params)
+    public $data;
+
+    public function setData($params)
+    {
+        $this->data = $params;
+    }
+
+
+    public function isValid()
     {
         $_SESSION['errormsg'] = array();
-        if ($params['title'] === '') {
+        if ($this->data['title'] === '') {
             $_SESSION['errormsg']['title'] = "タイトルが入力されていません。";
         } else {
-            $_SESSION['success']['title'] = htmlspecialchars($params['title'], ENT_QUOTES, 'utf-8');
+            $_SESSION['success']['title'] = htmlspecialchars($this->data['title'], ENT_QUOTES, 'utf-8');
         }
-        if ($params['detail'] === '') {
+        if ($this->data['detail'] === '') {
             $_SESSION['errormsg']['detail'] = "内容が入力されていません。";
         } else {
-            $_SESSION['success']['detail'] = htmlspecialchars($params['detail'], ENT_QUOTES, 'utf-8');
+            $_SESSION['success']['detail'] = htmlspecialchars($this->data['detail'], ENT_QUOTES, 'utf-8');
+        }
+        if (empty($_SESSION['errormsg'])) {
+            return true;
+        } else {
+            return false;
         }
     }
 
