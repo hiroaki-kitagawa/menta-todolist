@@ -7,7 +7,7 @@ class RegisterController {
     {
         $register = new Register();
         if($register->addUser()) {
-            header("Location: top.php");
+            header("Location: ../todo/top.php");
         } else {
             header("Location: signup.php");
         }

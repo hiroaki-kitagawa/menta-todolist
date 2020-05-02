@@ -33,12 +33,9 @@ class Register
         } else {
             // 登録されていなければinsert
             $this->db->beginTransaction();
-            $sql = "INSERT INTO users(name, email, password) VALUES (:name, :email, :password)";
+            $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
             $stmt = $this->db->prepare($sql);
-            $stmt->bindValue(':name', $name);
-            $stmt->bindValue(':email', $email);
-            $stmt->bindValue(':password', $password);
-            $stmt->execute();
+            $stmt->execute(array(':name' => $name, ':email' => $email, ':password' => $password));
             $this->db->commit();
             $_SESSION['msg'] = '会員登録が完了しました。';
             return true;
