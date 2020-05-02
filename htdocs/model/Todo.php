@@ -29,8 +29,8 @@ class Todo
         }
 
         // DB接続を解除
-        $stmt = null;
         $db = null;
+        $stmt = null;
 
         return $result;
     }

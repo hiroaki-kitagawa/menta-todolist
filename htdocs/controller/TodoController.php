@@ -54,7 +54,6 @@ class TodoController {
             $title = $valid_data['title'];
             $detail = $valid_data['detail'];
             $todo->insert($title, $detail);
-            session_destroy();
             header("Location: top.php");
         } else {
             //NGなら？
@@ -93,7 +92,6 @@ class TodoController {
             $title = $valid_data['title'];
             $detail = $valid_data['detail'];
             $todo->update($id, $title, $detail, $status);
-            session_destroy();
             header("Location: top.php");
         } else {
             header("Location: edit.php?id=" . (int)$id );
