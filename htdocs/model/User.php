@@ -44,12 +44,15 @@ class User
         $name = $params['name'];
         $email = $params['email'];
         $password = password_hash($params['password'], PASSWORD_BCRYPT);
+        $created_at = date('Y-m-d H:i:s');
+        $updated_at = date('Y-m-d H:i:s');
+
 
         try {
             $this->db->beginTransaction();
-            $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
+            $sql = "INSERT INTO users (name, email, password, created_at, updated_at) VALUES (:name, :email, :password, :created_at, :updated_at)";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute(array(':name' => $name, ':email' => $email, ':password' => $password));
+            $stmt->execute(array(':name' => $name, ':email' => $email, ':password' => $password, ':created_at' => $created_at, ':updated_at' => $updated_at));
             $this->db->commit();
         } catch(PDOException $e) {
             $this->db->rollBack();

@@ -21,6 +21,7 @@ class UserController {
         );
 
         if($validation->validUser()) {
+            $_SESSION['errormsg'] = "既に登録されているメールアドレスです。";
             header("Location: signup.php");
         } else {
             $user = new User();

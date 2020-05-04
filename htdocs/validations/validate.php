@@ -78,7 +78,7 @@ class Validation {
         $_SESSION['erromsg'] = array();
         $pass = $this->data['pass'];
         if ($pass === '') {
-            $_SESSION['errormsg']['mail'] = "パスワードが入力されていません。";
+            $_SESSION['errormsg']['pass'] = "パスワードが入力されていません。";
             return false;
         }
         return true;
