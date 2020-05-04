@@ -23,9 +23,8 @@ class User
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-        var_dump($row['password']);
 
-        if (password_verify($_POST['pass'], $row['password'])) {
+        if (password_verify($_POST['pass'], $row[0]['password'])) {
             session_regenerate_id(true);
             $_SESSION['mail'] = $row['email'];
             echo 'ログインしました。';
