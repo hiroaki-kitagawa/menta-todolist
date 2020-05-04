@@ -3,7 +3,6 @@ session_start();
 require_once(dirname(__FILE__,2) . "/model/Todo.php");
 require_once(dirname(__FILE__,2) . "/validations/validate.php");
 
-
 class TodoController {
     public function index()
     {

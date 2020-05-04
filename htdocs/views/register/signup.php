@@ -1,9 +1,14 @@
 <?php
+    session_start();
+    require_once(dirname(__FILE__,3) . "/controller/UserController.php");
 
+    if (isset($_POST['email'])) {
+        UserController::register();
+    }
 
 ?>
 <h1>新規会員登録</h1>
-<form action="register.php" method="post">
+<form action="signup.php" method="post">
 <div>
     <label>名前：<label>
     <input type="text" name="name" required>
