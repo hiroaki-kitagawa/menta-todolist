@@ -35,15 +35,15 @@ class User
         }
     }
 
-    public function insertUser()
+    public function insertUser($params)
     {
         $db = null;
         $sql = null;
         $stmt = null;
 
-        $name = $_SESSION['name'];
-        $email = $_SESSION['email'];
-        $password = password_hash($_SESSION['password'], PASSWORD_BCRYPT);
+        $name = $params['name'];
+        $email = $params['email'];
+        $password = password_hash($params['password'], PASSWORD_BCRYPT);
 
         try {
             $this->db->beginTransaction();
