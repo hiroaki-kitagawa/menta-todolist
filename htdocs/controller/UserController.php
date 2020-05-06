@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once(dirname(__FILE__,2) . "/model/User.php");
-require_once(dirname(__FILE__,2) . "/validations/validate.php");
+require_once(dirname(__FILE__,2) . "/validations/userValidation.php");
 
 
 class UserController {
@@ -9,9 +9,9 @@ class UserController {
     {
         $name= $_POST['name'];
         $email = $_POST['email'];
-        $pass = password_hash($_POST['pass'], PASSWORD_BCRYPT);
+        $pass = $_POST['pass'];
 
-        $validation = new Validation;
+        $validation = new userValidation;
         $validation->setData($email);
 
         $data = array(

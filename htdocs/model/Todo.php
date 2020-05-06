@@ -11,8 +11,7 @@ class Todo
 
     public function getAll()
     {
-        // ユーザーIDを一時的に定義
-        $id = 1;
+        $id = $_SESSION['user_id'];
 
         $db = null;
         $sql = null;
@@ -92,7 +91,7 @@ class Todo
         $stmt = null;
         $result = null;
 
-        $user_id = 1; // 一時的に固定
+        $user_id = $_SESSION['user_id'];
         $status = 0;
         $created_at = date('Y-m-d H:i:s');
         $updated_at = date('Y-m-d H:i:s');
@@ -123,7 +122,7 @@ class Todo
         $stmt = null;
         $result = null;
 
-        $user_id = 1; // ユーザID一時的に固定
+        $user_id = $_SESSION['user_id'];
 
         $created_at = date('Y-m-d H:i:s');
         $updated_at = date('Y-m-d H:i:s');

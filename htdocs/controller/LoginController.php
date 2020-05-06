@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once(dirname(__FILE__,2) . "/model/User.php");
-require_once(dirname(__FILE__,2) . "/validations/validate.php");
+require_once(dirname(__FILE__,2) . "/validations/userValidation.php");
 
 class LoginController {
     public function login()
@@ -13,11 +13,11 @@ class LoginController {
             "pass" => $pass,
         );
 
-        $validation = new Validation;
+        $validation = new userValidation;
 
         $validation->setData($data);
 
-        if ($validation->validEmail() && $validation->validPassword()){
+        if ($validation->isValid()){
             $user = new User();
             return $user->verifyPassword($data);
 

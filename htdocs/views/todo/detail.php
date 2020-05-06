@@ -1,6 +1,12 @@
 <?php
     require_once(dirname(__FILE__,3) . "/controller/TodoController.php");
 
+    // ログイン済みか確認
+    if(!isset($_SESSION['user_id'])) {
+        header('Location: ../login/index.php');
+        exit;
+    }
+
     $array = TodoController::detail();
 ?>
 

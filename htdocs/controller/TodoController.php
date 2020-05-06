@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once(dirname(__FILE__,2) . "/model/Todo.php");
-require_once(dirname(__FILE__,2) . "/validations/validate.php");
+require_once(dirname(__FILE__,2) . "/validations/todoValidation.php");
 
 class TodoController {
     public function index()
@@ -42,7 +42,7 @@ class TodoController {
         );
 
         //validation クラスのインスタンス生成
-        $validation = new Validation;
+        $validation = new todoValidation;
 
         //生成したインスタンスにパラメータをセット
         $validation->setData($data);
@@ -82,7 +82,7 @@ class TodoController {
             "detail" => $detail,
         );
 
-        $validation = new Validation;
+        $validation = new todoValidation;
 
         $validation->setData($data);
 

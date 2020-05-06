@@ -1,7 +1,23 @@
 <?php
     require_once(dirname(__FILE__,3) . "/controller/TodoController.php");
     session_start();
+
+    // ログイン済みか確認
+    if(!isset($_SESSION['user_id'])) {
+        header('Location: ../login/index.php');
+        exit;
+    }
+
     $array = TodoController::index();
+
+    // ログアウト機能
+    if(isset($_POST['logout'])) {
+        $_SESSION = [];
+        session_destroy();
+
+        header('Location: ../login/index.php');
+        exit;
+    }
 ?>
 
 
@@ -28,5 +44,8 @@
     <?php  }?>
 
     <button><a href="new.php">新規作成</a></button>
+    <form method="post" action="top.php">
+        <input type="submit" name="logout" value="ログアウト">
+    </form>
 </body>
 </html>

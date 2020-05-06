@@ -12,25 +12,25 @@ class User
     public function verifyPassword($param)
     {
         $mail = $param['mail'];
-        $pass = password_hash($param['pass'], PASSWORD_BCRYPT);
+        $pass = $param['pass'];
 
         try {
             $sql = "SELECT * FROM users WHERE email = :email";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(':email', $mail);
             $stmt->execute();
-            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
 
-        if (password_verify($_POST['pass'], $row[0]['password'])) {
+        if (password_verify($pass,$row['password'])) {
             session_regenerate_id(true);
-            $_SESSION['mail'] = $row['email'];
-            echo 'ログインしました。';
+            $_SESSION['user_id'] = $row['user_id'];
+            header("Location: ../todo/top.php");
         } else {
-            echo 'メールアドレスまたはパスワードが間違っています。';
-            return false;
+            $_SESSION['errormsg'] = "ログインに失敗しました。";
+            header("Location: ../login/index.php");
         }
     }
 
@@ -42,7 +42,7 @@ class User
 
         $name = $params['name'];
         $email = $params['email'];
-        $password = password_hash($params['password'], PASSWORD_BCRYPT);
+        $password = password_hash($params['pass'], PASSWORD_BCRYPT);
         $created_at = date('Y-m-d H:i:s');
         $updated_at = date('Y-m-d H:i:s');
 
